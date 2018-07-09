@@ -1,6 +1,7 @@
 import React from 'react';
 import Greeter from './Greeter';
 
+
 // function App() {
 //   return (
 //     <div>
@@ -19,13 +20,13 @@ class App extends React.Component {
   componentDidUpdate() {
     console.log('run on update');
   }
-  
+
   render() {
     return (
       <div>
         <h1>Oi!</h1>
         <p>hey!</p>
-        <Greeter />
+        <Greeter name={'Martha'} mood={'fine'}/>
       </div>
     );
   }
