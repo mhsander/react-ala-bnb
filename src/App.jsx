@@ -2,16 +2,7 @@ import React from 'react';
 import Greeter from './Greeter';
 
 
-// function App() {
-//   return (
-//     <div>
-//       <h1>Oi!</h1>
-//       <p>hey!</p>
-//       <Greeter />
-//     </div>
-//   );
-// }
-
+//"life cycle method
 class App extends React.Component {
   componentDidMount() {
     console.log('run only once');
@@ -22,11 +13,12 @@ class App extends React.Component {
   }
 
   render() {
+    const timestamp = Date.now();
+
     return (
       <div>
         <h1>Oi!</h1>
-        <p>hey!</p>
-        <Greeter name={'Martha'} mood={'fine'}/>
+        <Greeter name={'Martha'} mood={'fine'} time={timestamp}/>
       </div>
     );
   }
