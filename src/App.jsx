@@ -1,24 +1,38 @@
 import React from 'react';
 import Greeter from './Greeter';
 
-
-//"life cycle method
 class App extends React.Component {
-  componentDidMount() {
-    console.log('run only once');
-  }
+  state = {
+    timestamp1: Date.now(),
+    timestamp2: Date.now(),
+  };
 
-  componentDidUpdate() {
-    console.log('run on update');
-  }
+  handleUpdateTimestamp1 = () => {
+    this.setState({
+      timestamp1: Date.now(),
+    });
+  };
+
+  handleUpdateTimestamp2 = () => {
+    this.setState({
+      timestamp2: Date.now(),
+    });
+  };
 
   render() {
-    const timestamp = Date.now();
-
     return (
       <div>
-        <h1>Oi!</h1>
-        <Greeter name={'Martha'} mood={'fine'} time={timestamp}/>
+        <h1>Our Greeter App</h1>
+        <Greeter
+          name="Barney"
+          time={this.state.timestamp1}
+          doTheClick={this.handleUpdateTimestamp1}
+        />
+        <Greeter
+          name="Thomas"
+          time={this.state.timestamp2}
+          doTheClick={this.handleUpdateTimestamp2}
+        />
       </div>
     );
   }

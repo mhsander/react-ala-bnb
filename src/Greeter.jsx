@@ -1,28 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function Greeter({ name, time, doTheClick }) {
+  const formattedDateString = new Date(time);
 
-export default function Greeter({name, mood, time}) {
-  const formattedDate = new Date(time);
+  const myMessage = `Greetings ${name}! I said my greetings at ${formattedDateString}`;
 
   return (
-    <div>
-      <section>
-        <h2>{`Greetings, ${name}!`}</h2>
-        <h2>How is it going?</h2>
-        <h3>{`Everything is ${mood}.`}</h3>
-
-        <h3>{`Today is ${formattedDate}`}</h3>
-        <button>update time!</button>
-
-      </section>
-    </div>
+    <section>
+      <h2>{myMessage}</h2>
+      <button onClick={doTheClick}>click here to update</button>
+    </section>
   );
 }
 
 Greeter.propTypes = {
   name: PropTypes.string.isRequired,
-  mood: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
-}
+  doTheClick: PropTypes.func.isRequired,
+};
 
+export default Greeter;
