@@ -1,38 +1,76 @@
 import React from 'react';
-import Greeter from './Greeter';
+import Post from './Post';
 
 class App extends React.Component {
   state = {
-    timestamp1: Date.now(),
-    timestamp2: Date.now(),
+    posts: [
+      {
+        id: 1,
+        name: 'Brenton',
+        message: 'HI',
+      },
+      {
+        id: 2,
+        name: 'Martha',
+        message: 'Whats up?',
+      },
+    ],
+    newPost: {
+      name: '',
+      message: '',
+    },
   };
 
-  handleUpdateTimestamp1 = () => {
-    this.setState({
-      timestamp1: Date.now(),
-    });
+  handleInputChange = e => {
+    const keyName = e.target.name;
+    const inputValue = e.target.value;
+
+    this.setState(prevState => ({
+      newPost: {
+        ...prevState.newPost,
+        [keyName]: inputValue,
+      },
+    }));
   };
 
-  handleUpdateTimestamp2 = () => {
-    this.setState({
-      timestamp2: Date.now(),
-    });
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log('submit the form');
   };
 
   render() {
     return (
       <div>
-        <h1>Our Greeter App</h1>
-        <Greeter
-          name="Barney"
-          time={this.state.timestamp1}
-          doTheClick={this.handleUpdateTimestamp1}
-        />
-        <Greeter
-          name="Thomas"
-          time={this.state.timestamp2}
-          doTheClick={this.handleUpdateTimestamp2}
-        />
+        <h1>Our Chat App</h1>
+        <ul>
+          {this.state.posts.map(post => (
+            <Post
+              key={post.id}
+              name={post.name}
+              message={post.message}
+              timestamp={Date.now()}
+            />
+          ))}
+        </ul>
+        <div style={{ background: 'beige' }}>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              name="name"
+              type="text"
+              placeholder="name"
+              onChange={this.handleInputChange}
+              value={this.state.newPost.name}
+            />
+            <input
+              name="message"
+              type="text"
+              placeholder="message"
+              onChange={this.handleInputChange}
+              value={this.state.newPost.message}
+            />
+            <button type="submit">Add Post</button>
+          </form>
+        </div>
       </div>
     );
   }
